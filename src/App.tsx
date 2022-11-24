@@ -22,6 +22,7 @@ function App() {
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
+          this test text is to see if vercel gets the changes
         </p>
       </div>
       <p className="read-the-docs">
