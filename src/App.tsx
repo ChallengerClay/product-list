@@ -1,33 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState, useEffect } from 'react'
+import {getProductsList} from './helpers/getProducts'
+import { IProductsList } from './types/interfaces'
+import Product from './components/Product'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+
+function App() {
+  const [productList, setProductList] = useState<IProductsList>()
+    useEffect(() => {
+      const handlePokemons = async () => {
+        const products = await getProductsList();
+        setProductList(products);
+      };
+      handlePokemons();
+    }, []);
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-          this test text is to see if vercel gets the changes
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {productList?.products.map((product) => {
+            return <Product key={product.id} products={product}/>
+          })}
     </div>
   )
 }
