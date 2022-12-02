@@ -13,13 +13,13 @@ import './App.css'
 function App() {
   const [productList, setProductList] = useState<IProductsList>()
   const [col,setCol]=useState(4)
-  const [page,setPage]= useState(1)
+  const [page,setPage]= useState()
   //const [loading, setLoading] = useState(false)
     
     useEffect(() => {
       const handleproducts = async () => {
-        setProductList(productList);
-        console.log(productList?.limit)
+        const products = await getProductsList();
+        setProductList(products);
       };
       handleproducts();
     }, []);
