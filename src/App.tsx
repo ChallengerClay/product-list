@@ -13,16 +13,16 @@ import './App.css'
 function App() {
   const [productList, setProductList] = useState<IProductsList>()
   const [col,setCol]=useState(4)
-  const [page,setPage]= useState()
+  const [page,setPage]= useState(1)
   //const [loading, setLoading] = useState(false)
     
     useEffect(() => {
       const handleproducts = async () => {
-        const products = await getProductsList();
+        const products = await getProductsList(page);
         setProductList(products);
       };
       handleproducts();
-    }, []);
+    }, [page]);
 
     
     const styleList = {
@@ -52,7 +52,7 @@ function App() {
             })}
       </div>
       <Stack spacing={2}>
-        <Pagination count={(productList?.total/productList?.limit)} showFirstButton showLastButton />
+        <Pagination count={(productList?.total/productList?.limit)} showFirstButton showLastButton onChange={e => setPage(Number(e.target.innerText))}/>
       </Stack>
     </div>
   )
