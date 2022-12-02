@@ -1,11 +1,13 @@
 import { dummydata } from '.';
-import { IProductsList, IProduct } from '../types/interfaces';
+import { IProductsList } from '../types/interfaces';
 
 export const getProductsList = async(): Promise<IProductsList>=> {
     const {data} = await dummydata.get<IProductsList>('/products',{
         params: {
-            limit:30
+            total:100,
+            limit:20,
         },
     });
     return data
 }
+    
